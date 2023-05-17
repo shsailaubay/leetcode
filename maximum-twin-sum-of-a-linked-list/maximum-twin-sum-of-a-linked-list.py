@@ -5,9 +5,17 @@
 #         self.next = next
 class Solution:
     def pairSum(self, head: Optional[ListNode]) -> int:
-        lst = []
+        first_part = None
+        f = head
+        res = 0
         while head:
-            lst.append(head.val)
+            if f:
+                f = f.next.next
+                first_part = ListNode(head.val, first_part)
+            else:
+                res = max(res, first_part.val + head.val)
+                first_part = first_part.next
+                
             head = head.next
-        return max([lst[i] + lst[len(lst)-1-i] for i in range(0, len(lst))])
+        return res
         
