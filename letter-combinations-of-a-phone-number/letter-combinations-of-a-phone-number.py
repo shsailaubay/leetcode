@@ -1,5 +1,3 @@
-from itertools import product
-
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         if not len(digits):
@@ -14,5 +12,9 @@ class Solution:
             '8': 'tuv',
             '9': 'wxyz',
         }
-        return map(lambda s: "".join(s), product(*(chars[d] for d in digits)))
+        result = ['',]
+        for d_ in digits:
+            d = chars[d_]
+            result = [r+x for r in result for x in d]
+        return result
 
