@@ -13,7 +13,7 @@ class Solution:
         if ln == n:
             return head.next
         prev = head
-        for i in range(0, ln - n - 1):
+        for i in range(1, ln - n):
             prev = prev.next
         prev.next = prev.next.next
         return head
