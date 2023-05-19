@@ -27,7 +27,6 @@ class Solution:
             i += 1
         i = 0
         prev = head
-        print("len", ln)
         if i == ln - n:
             return prev.next
         while True:
