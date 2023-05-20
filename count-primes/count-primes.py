@@ -9,7 +9,7 @@ class Solution:
         for i in range(2, n):
 
             if primes[i]:
-                for j in range(2 * i, n, i):
+                for j in range(i * i, n, i):
                     primes[j] = False
         
         return sum(primes)
