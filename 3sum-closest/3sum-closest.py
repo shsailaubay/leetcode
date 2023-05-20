@@ -1,6 +1,7 @@
 class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -> int:
         nums.sort()
+        t = set()
         if target >= 3000:
             return nums[-1] + nums[-2] + nums[-3]
         elif target <= -3000:
@@ -30,6 +31,9 @@ class Solution:
         for i in range(0, len(nums)):
             for j in range(i+1, len(nums)):
                 s = nums[i] + nums[j]
+                if s in t:
+                    continue
+                t.add(s)
                 lst = nums[i + 1:j] + nums[j+1:len(nums)]
                 if len(lst) == 0:
                     continue
