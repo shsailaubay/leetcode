@@ -13,14 +13,10 @@ class Solution:
             return r.next
 
         def min_index(lst: List[Optional[ListNode]]) -> int:
-            m = 0
-            for i in range(0, len(lst)):
-                if lst[i].val < lst[m].val:
-                    m = i
-            return m
+            return 
 
         while lists:
-            idx = min_index(lists)
+            idx = lists.index(min(lists, key=lambda x: getattr(x, 'val')))
             curr.next = lists[idx]
             curr = curr.next
             if lists[idx].next:
