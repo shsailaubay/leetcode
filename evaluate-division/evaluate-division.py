@@ -2,13 +2,11 @@ from collections import defaultdict
 
 class Solution:
     def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-        d = dict()
+        d = defaultdict(dict)
         visited = set()
 
         def add(a, b, val):
             if (a, b) not in visited:
-                if a not in d:
-                    d[a] = dict()
                 visited.add((a, b))
                 d[a][b] = val
 
