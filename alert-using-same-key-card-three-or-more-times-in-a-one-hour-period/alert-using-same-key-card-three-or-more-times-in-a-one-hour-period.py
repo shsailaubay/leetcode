@@ -1,6 +1,3 @@
-from collections import defaultdict
-from bisect import insort
-
 class Solution:
     def alertNames(self, keyName: List[str], keyTime: List[str]) -> List[str]:
 
@@ -8,9 +5,11 @@ class Solution:
             h, m = t.split(":")
             return (int(h) * 60) + int(m)
 
-        names = defaultdict(list)
+        names = dict()
 
         for i in range(0, len(keyName)):
+            if keyName[i] not in names:
+                names[keyName[i]] = list()
             names[keyName[i]].append(to_int(keyTime[i]))
         
         res = []
