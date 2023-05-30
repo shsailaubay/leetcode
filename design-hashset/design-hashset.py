@@ -3,16 +3,22 @@ from array import array
 class MyHashSet:
 
     def __init__(self):
-        self.bitVector = array('H', [0] * 62501)
+        self.bitVector = array('H', [0])
     
     def _get_coord(self, key: int) -> tuple[int, int]:
         return divmod(key, 16)
     
     def _is_set_bit(self, row, col) -> bool:
+        if row >= len(self.bitVector):
+            return False
         return (self.bitVector[row] & (1 << col)) != 0
 
     def add(self, key: int) -> None:
         row, col = self._get_coord(key)
+
+        if len(self.bitVector) <= row:
+            self.bitVector.extend([0] * (row - len(self.bitVector) + 1))
+
         self.bitVector[row] |= 1 << col
 
     def remove(self, key: int) -> None:
