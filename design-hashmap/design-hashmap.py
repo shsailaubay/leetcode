@@ -3,7 +3,7 @@ from array import array
 class MyHashMap:
 
     def __init__(self):
-        self.table = array("i", [-1] * ((10 ** 6) + 1))
+        self.table = [-1] * ((10 ** 6) + 1)
 
     def put(self, key: int, value: int) -> None:
         self.table[key] = value
