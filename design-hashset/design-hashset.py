@@ -1,7 +1,9 @@
+from array import array
+
 class MyHashSet:
 
     def __init__(self):
-        self.bitVector = [0] * 62501
+        self.bitVector = array('H', [0] * 62501)
     
     def _get_coord(self, key: int) -> tuple[int, int]:
         return divmod(key, 16)
