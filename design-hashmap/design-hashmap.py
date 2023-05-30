@@ -6,14 +6,14 @@ class MyHashMap:
         self.table = []
     
     def _coord(self, key: int) -> tuple[int, int]:
-        return divmod(key, 1000)
+        return divmod(key, 100)
 
     def put(self, key: int, value: int) -> None:
         r, c = self._coord(key)
         if r >= len(self.table):
             self.table.extend([-1] * (r - len(self.table) + 1))
         if self.table[r] == -1:
-            self.table[r] = array("i", [-1] * 1001)
+            self.table[r] = array("i", [-1] * 10001)
         self.table[r][c] = value
         
 
