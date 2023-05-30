@@ -1,19 +1,29 @@
 class MyHashSet:
 
     def __init__(self):
-        self.list = [False] * ((10 ** 6) + 1)
+        self.list = [False] * 1001
         
+    def _get_bucket(self, key: int):
+        return divmod(key, 1000)
 
     def add(self, key: int) -> None:
-        self.list[key] = True
+        i, b = self._get_bucket(key)
+        if self.list[i] == False:
+            self.list[i] = [False] * 1001
+        self.list[i][b] = True
         
 
     def remove(self, key: int) -> None:
-        self.list[key] = False
+        i, b = self._get_bucket(key)
+        if self.list[i] != False:
+            self.list[i][b] = False
         
 
     def contains(self, key: int) -> bool:
-        return self.list[key]
+        i, b = self._get_bucket(key)
+        if self.list[i] == False:
+            return False
+        return self.list[i][b]
 
 
 # Your MyHashSet object will be instantiated and called as such:
