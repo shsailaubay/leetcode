@@ -1,11 +1,9 @@
-from collections import defaultdict
-
 class UndergroundSystem:
 
     def __init__(self):
         # key = current cutomer id, value = tuple(station_name, t)
         self.checkins = dict()
-        self.completed = defaultdict(lambda: [0, 0])
+        self.completed = collections.defaultdict(lambda: [0, 0])
 
     def checkIn(self, id: int, stationName: str, t: int) -> None:
         self.checkins[id] = (stationName, t)
@@ -16,7 +14,8 @@ class UndergroundSystem:
         self.completed[(checkinStation, stationName)][1] += 1
 
     def getAverageTime(self, startStation: str, endStation: str) -> float:
-        return self.completed[(startStation, endStation)][0] / self.completed[(startStation, endStation)][1]
+        s, l = self.completed[(startStation, endStation)]
+        return s / l
  
 # Your UndergroundSystem object will be instantiated and called as such:
 # obj = UndergroundSystem()
