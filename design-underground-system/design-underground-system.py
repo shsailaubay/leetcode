@@ -1,5 +1,4 @@
 from statistics import mean
-from collections import defaultdict
 
 class UndergroundSystem:
 
@@ -20,7 +19,7 @@ class UndergroundSystem:
         self.checkins[id] = (stationName, t)
 
     def checkOut(self, id: int, stationName: str, t: int) -> None:
-        checkinStation, checkinTime = self.checkins[id]
+        checkinStation, checkinTime = self.checkins.pop(id)
         self._setDirectionValue(checkinStation, stationName, t - checkinTime)
 
     def getAverageTime(self, startStation: str, endStation: str) -> float:
