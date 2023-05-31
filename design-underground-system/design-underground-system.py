@@ -1,34 +1,30 @@
 from statistics import mean
+from collections import defaultdict
 
 class UndergroundSystem:
 
     def __init__(self):
         # key = current cutomer id, value = tuple(station_name, t)
         self.checkins = dict()
-        # key = station_name, value = dict where key = station_name, value = list of travel times
         self.completed = dict()
     
-    def _getOrCreateDirection(self, station_a: str, station_b: str) -> List[int]:
-        if station_a not in self.completed:
-            self.completed[station_a] = dict()
-        
-        if station_b not in self.completed[station_a]:
-            self.completed[station_a][station_b] = list()
-            # self.completed[station_b][station_a] = self.completed[station_a][station_b]
-        
-        return self.completed[station_a][station_b]
+    def _setDirectionValue(self, startStation: str, endStation: str, t: int) -> None:
+        key = (startStation, endStation)
+        if key not in self.completed:
+            self.completed[key] = (t, 1)
+        else:
+            v, c = self.completed[key]
+            self.completed[key] = (v + ((t - v)/(c + 1)), c + 1)
 
     def checkIn(self, id: int, stationName: str, t: int) -> None:
         self.checkins[id] = (stationName, t)
 
     def checkOut(self, id: int, stationName: str, t: int) -> None:
         checkinStation, checkinTime = self.checkins[id]
-        direction = self._getOrCreateDirection(checkinStation, stationName)
-        direction.append(t - checkinTime)
+        self._setDirectionValue(checkinStation, stationName, t - checkinTime)
 
     def getAverageTime(self, startStation: str, endStation: str) -> float:
-        direction = self._getOrCreateDirection(startStation, endStation)
-        return mean(direction)
+        return self.completed[(startStation, endStation)][0]
 
 
 # Your UndergroundSystem object will be instantiated and called as such:
